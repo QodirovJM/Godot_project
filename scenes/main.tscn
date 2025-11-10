@@ -1,0 +1,221 @@
+[gd_scene load_steps=18 format=3 uid="uid://d2onjik2vkp5q"]
+
+[ext_resource type="Script" uid="uid://c6m7665y64gj4" path="res://assets/scripts/main.gd" id="1_dfgan"]
+[ext_resource type="PackedScene" uid="uid://cx7aba54pc7ii" path="res://assets/scenes/player.tscn" id="1_kpi06"]
+[ext_resource type="PackedScene" uid="uid://ckuakr41kad2u" path="res://assets/scenes/spawner.tscn" id="2_dfgan"]
+[ext_resource type="Texture2D" uid="uid://cup618yp0ipud" path="res://assets/ui/f7032508-1ec5-4d94-a44e-cf2f76badc37.png" id="2_p5d64"]
+[ext_resource type="Texture2D" uid="uid://buhu4y7dsr6ci" path="res://assets/ui/6a22b6a2-7949-4cb0-9c4f-c6518ed68881.png" id="3_48cn3"]
+[ext_resource type="FontFile" uid="uid://bii0gfit6a3qh" path="res://assets/ofont.ru_Ireland.ttf" id="4_etxf0"]
+[ext_resource type="Texture2D" uid="uid://byfobk3feti8" path="res://assets/ui/button_bg.png" id="5_vesw4"]
+[ext_resource type="PackedScene" uid="uid://jmmljwkhlgny" path="res://assets/scenes/virtual_joystick.tscn" id="6_vesw4"]
+[ext_resource type="Texture2D" uid="uid://dty6m650ikmhr" path="res://assets/ui/sword_button.png" id="7_xplbd"]
+[ext_resource type="AudioStream" uid="uid://ccnnfy76m5v3y" path="res://assets/audio/main_theme.ogg" id="8_6rsl6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xplbd"]
+texture = ExtResource("5_vesw4")
+expand_margin_left = 20.0
+expand_margin_top = 16.0
+expand_margin_right = 20.0
+expand_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6rsl6"]
+texture = ExtResource("5_vesw4")
+expand_margin_left = 20.0
+expand_margin_top = 16.0
+expand_margin_right = 20.0
+expand_margin_bottom = 16.0
+modulate_color = Color(0.3515629, 0.3515629, 0.35156286, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p5d64"]
+texture = ExtResource("5_vesw4")
+expand_margin_left = 20.0
+expand_margin_top = 16.0
+expand_margin_right = 20.0
+expand_margin_bottom = 16.0
+modulate_color = Color(0.24840015, 0.24840018, 0.24840015, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48cn3"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ov4sg"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5jh"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytb86"]
+size = Vector2(100, 100)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_dfgan")
+
+[node name="Bg" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 645.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_p5d64")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Barac1" type="Sprite2D" parent="Bg"]
+position = Vector2(863, 414)
+scale = Vector2(0.09277344, 0.080078125)
+texture = ExtResource("3_48cn3")
+
+[node name="Barac2" type="Sprite2D" parent="Bg"]
+position = Vector2(835.00006, 167.00003)
+scale = Vector2(0.09277344, 0.080078125)
+texture = ExtResource("3_48cn3")
+
+[node name="Barac3" type="Sprite2D" parent="Bg"]
+position = Vector2(278.00006, 138.00003)
+scale = Vector2(0.09277344, 0.080078125)
+texture = ExtResource("3_48cn3")
+
+[node name="Barac4" type="Sprite2D" parent="Bg"]
+position = Vector2(278.00006, 440.00003)
+scale = Vector2(0.09277344, 0.080078125)
+texture = ExtResource("3_48cn3")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource("1_kpi06")]
+position = Vector2(93, 323)
+
+[node name="Spawner" parent="World" instance=ExtResource("2_dfgan")]
+
+[node name="Camera2D" type="Camera2D" parent="World"]
+position = Vector2(269, 165)
+offset = Vector2(305, 160)
+position_smoothing_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="TopBar" type="HBoxContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Счёт: 0 / 10"
+
+[node name="HPBar" type="TextureProgressBar" parent="HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+nine_patch_stretch = true
+tint_under = Color(0.2901961, 0.23137255, 0.16470589, 1)
+tint_over = Color(0.42352942, 0.7529412, 0.2901961, 1)
+
+[node name="CenterMsg" type="CenterContainer" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Message" type="Label" parent="HUD/CenterMsg"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+
+[node name="VirtualJoystick" parent="HUD" instance=ExtResource("6_vesw4")]
+
+[node name="MenuButton" type="Button" parent="HUD"]
+offset_left = 1090.0
+offset_right = 1135.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 60)
+theme_override_fonts/font = ExtResource("4_etxf0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxTexture_xplbd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6rsl6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xplbd")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_p5d64")
+text = "Меню"
+
+[node name="PauseButton" type="Button" parent="HUD"]
+offset_left = 1015.0
+offset_right = 1060.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 60)
+theme_override_fonts/font = ExtResource("4_etxf0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxTexture_xplbd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6rsl6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xplbd")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_p5d64")
+text = "Пауза"
+
+[node name="StartButton" type="Button" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -69.0
+offset_right = 47.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 60)
+theme_override_fonts/font = ExtResource("4_etxf0")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_xplbd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6rsl6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xplbd")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_p5d64")
+text = "Старт"
+
+[node name="AttackBtn" type="TextureButton" parent="HUD"]
+offset_left = 878.0
+offset_top = 414.0
+offset_right = 1126.0
+offset_bottom = 648.0
+texture_normal = ExtResource("7_xplbd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DPad" type="Node2D" parent="HUD"]
+
+[node name="Up" type="TouchScreenButton" parent="HUD/DPad"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(132, 511)
+shape = SubResource("RectangleShape2D_48cn3")
+passby_press = true
+action = "move_up"
+
+[node name="Down" type="TouchScreenButton" parent="HUD/DPad"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(132, 613)
+shape = SubResource("RectangleShape2D_ov4sg")
+passby_press = true
+action = "move_down"
+
+[node name="Left" type="TouchScreenButton" parent="HUD/DPad"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(81, 564)
+shape = SubResource("RectangleShape2D_ua5jh")
+passby_press = true
+action = "move_left"
+
+[node name="Right" type="TouchScreenButton" parent="HUD/DPad"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(183, 564)
+shape = SubResource("RectangleShape2D_ytb86")
+passby_press = true
+action = "move_right"
+
+[node name="MusicGame" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_6rsl6")
+autoplay = true
+bus = &"Music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

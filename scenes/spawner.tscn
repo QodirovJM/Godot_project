@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckuakr41kad2u"]
+
+[ext_resource type="Script" uid="uid://bhb5nrm0b2g0f" path="res://assets/scripts/spawner.gd" id="1_7bd6b"]
+[ext_resource type="PackedScene" uid="uid://b8qodet07bw88" path="res://assets/scenes/orc.tscn" id="2_xcdq2"]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource("1_7bd6b")
+orc_scene = ExtResource("2_xcdq2")
+
+[node name="Spawn1" type="Marker2D" parent="."]
+position = Vector2(278, 147)
+
+[node name="Spawn2" type="Marker2D" parent="."]
+position = Vector2(863, 414)
+
+[node name="Spawn3" type="Marker2D" parent="."]
+position = Vector2(278, 440)
+
+[node name="Spawn4" type="Marker2D" parent="."]
+position = Vector2(835, 167)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

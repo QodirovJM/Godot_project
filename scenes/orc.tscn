@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8qodet07bw88"]
+
+[ext_resource type="SpriteFrames" uid="uid://b0twchxse8t8u" path="res://assets/characters/Orc/Orc with shadows/orc_frames.tres" id="1_atppa"]
+[ext_resource type="Script" uid="uid://cjlj5xei7kdcu" path="res://assets/scripts/orc.gd" id="1_k07qe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k07qe"]
+size = Vector2(13, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iipqi"]
+size = Vector2(19, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6ll0"]
+size = Vector2(16, 19)
+
+[node name="Orc" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_k07qe")
+attack_cooldown = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_k07qe")
+
+[node name="BodyRoot" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BodyRoot"]
+sprite_frames = ExtResource("1_atppa")
+animation = &"idle"
+
+[node name="Hitbox" type="Area2D" parent="BodyRoot"]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyRoot/Hitbox"]
+visible = false
+position = Vector2(14.5, -1.5)
+shape = SubResource("RectangleShape2D_iipqi")
+
+[node name="Hurtbox" type="Area2D" parent="BodyRoot"]
+collision_layer = 64
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyRoot/Hurtbox"]
+visible = false
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_u6ll0")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="AttackActive" type="Timer" parent="."]
+wait_time = 0.12
+one_shot = true
+
+[node name="ThinkTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

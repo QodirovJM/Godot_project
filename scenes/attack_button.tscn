@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbiv85653vkh"]
+
+[ext_resource type="Texture2D" uid="uid://dty6m650ikmhr" path="res://assets/ui/sword_button.png" id="1_j4wmg"]
+[ext_resource type="Script" uid="uid://cbdhaxc40d3ql" path="res://assets/scripts/attack_button.gd" id="2_lfia5"]
+
+[node name="AttackButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_j4wmg")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_lfia5")
